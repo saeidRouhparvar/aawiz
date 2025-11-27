@@ -1,4 +1,6 @@
 :root {
+--base:--base: #000000
+
   /* Cyan */
   --cyan-50: theme(colors.cyan.50);
   --cyan-100: theme(colors.cyan.100);
@@ -53,6 +55,8 @@
 }
 
 .dark {
+--base: #ffffff;
+
   /* Cyan */
   --cyan-50: theme(colors.cyan.950);
   --cyan-100: theme(colors.cyan.900);

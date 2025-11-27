@@ -10,6 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        base: "var(--base)",
         cyanV: {
           50: "var(--cyan-50)",
           100: "var(--cyan-100)",
@@ -23,7 +24,6 @@ const config: Config = {
           900: "var(--cyan-900)",
           950: "var(--cyan-950)",
         },
-
         neutV: {
           50: "var(--neutral-50)",
           100: "var(--neutral-100)",
@@ -37,7 +37,6 @@ const config: Config = {
           900: "var(--neutral-900)",
           950: "var(--neutral-950)",
         },
-
         redV: {
           50: "var(--red-50)",
           100: "var(--red-100)",
@@ -51,7 +50,6 @@ const config: Config = {
           900: "var(--red-900)",
           950: "var(--red-950)",
         },
-
         limeV: {
           50: "var(--lime-50)",
           100: "var(--lime-100)",
@@ -70,4 +68,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;
