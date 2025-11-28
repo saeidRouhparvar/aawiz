@@ -64,6 +64,20 @@ const config: Config = {
           950: "var(--lime-950)",
         },
       },
+      keyframes: {
+        "slide-right-left": {
+          "0%, 100%": { transform: "translateX(0)" },
+          "50%": { transform: "translateX(20px)" },
+        },
+        "slide-left-right": {
+          "0%, 100%": { transform: "translateX(0)" },
+          "50%": { transform: "translateX(-20px)" },
+        },
+      },
+      animation: {
+        "slide-right-left": "slide-right-left 4s ease-in-out infinite",
+        "slide-left-right": "slide-left-right 4s ease-in-out infinite",
+      },
     },
   },
   plugins: [],
