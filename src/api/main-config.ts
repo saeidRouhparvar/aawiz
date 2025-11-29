@@ -11,5 +11,5 @@ export const baseUrl: string =
 // API Endpoints
 export const endpoints = {
   // Send contact message
-  postMessage: `${baseUrl}/app_api/home_page/contact_us`,
+  getUsers: `${baseUrl}/users`,
 };
