@@ -1,44 +1,103 @@
+import React, { forwardRef, InputHTMLAttributes, useState, useEffect } from "react";
+import { Icon } from "../icons/icon";
+import { IconName } from "../icons";
 
-import React, { FC, InputHTMLAttributes, PropsWithChildren } from 'react';
-
-interface InputProps extends PropsWithChildren<InputHTMLAttributes<HTMLInputElement>> {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
   className?: string;
+  icon?: IconName;
+  iconPosition?: "left" | "right";
 }
 
-const Input: FC<InputProps> = ({ label, error, className = '', ...rest }) => {
-  const baseClasses = `
-    px-4 py-3 border border-neutV-500 rounded-sm transition-colors duration-200
-    text-neutV-700 border-neutV-900 placeholder:text-neutV-800
-    focus:outline-none focus:bg-limeV-50 focus:border-limeV-700 focus:text-limeV-700
-    hover:bg-limeV-50 hover:border-limeV-900 hover:text-limeV-700
-    disabled:bg-neutral-100 disabled:cursor-not-allowed disabled:border-0
-    w-full
-  `;
+const Input = forwardRef<HTMLInputElement, InputProps>(({
+  label,
+  error,
+  className = "",
+  icon,
+  iconPosition = "left",
+  value: valueProp,
+  defaultValue,
+  onChange,
+  ...rest
+}, ref) => {
 
-  const errorClasses = `
-   bg-redV-50 border-redV-900 focus:!border-redV-700 !text-redV-700
-   focus:!bg-red-50 hover:bg-redV-100 placeholder:text-redV-900
-  `;
+  const [internalValue, setInternalValue] = useState<string>(
+    valueProp !== undefined ? String(valueProp) : defaultValue ? String(defaultValue) : ""
+  );
+  const [isFocused, setIsFocused] = useState(false);
 
-  const labelClasses = `
-    mb-1 me-2 
-    ${error ? 'text-redV-700' : 'text-neutral-900'}
-  `;
+  useEffect(() => {
+    if (valueProp !== undefined) setInternalValue(String(valueProp ?? ""));
+  }, [valueProp]);
 
-  const errorTextClasses = 'mt-1 me-2 text-sm sm:text-xs md:text-md lg:text-lg text-red-700';
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (valueProp === undefined) setInternalValue(e.target.value);
+    onChange?.(e);
+  };
+
+  const hasValue = internalValue !== "";
+
+  const iconPadding = icon
+    ? iconPosition === "left"
+      ? "pl-10 pr-4"
+      : "pl-4 pr-10"
+    : "";
 
   return (
-    <div className="flex flex-col w-full">
-      {label && <label className={labelClasses}>{label}</label>}
-      <input
-        className={`${baseClasses} ${error ? errorClasses : ''} ${className}`}
-        {...rest}
-      />
-      {error && <p className={errorTextClasses}>{error}</p>}
+    <div className="relative w-full flex flex-col">
+      <div className="relative">
+        {label && (
+          <label
+            className={`
+              pointer-events-none absolute left-3 text-neutV-800 transition-all duration-150 top-3
+              transform origin-left text-xl ms-6 text-black dark:text-white
+              ${isFocused || hasValue ? "-translate-y-[26px] scale-75 -translate-x-[24px] bg-limeV-50 px-1 " : "translate-y-0 scale-100"}
+              ${error ? "text-redV-700" : "text-neutral-900"}
+            `}
+          >
+            {label}
+          </label>
+        )}
+
+        {icon && (
+          <span
+            className={`absolute top-1/2 -translate-y-1/2 text-neutV-700 ${iconPosition === "left" ? "left-3" : "right-3"}`}
+            aria-hidden
+          >
+            <Icon name={icon} className="text-limeV-700"/>
+          </span>
+        )}
+
+        <input
+          {...rest}
+          ref={ref}
+          value={valueProp !== undefined ? valueProp : internalValue}
+          onChange={handleChange}
+          onFocus={(e) => {
+            setIsFocused(true);
+            rest.onFocus?.(e);
+          }}
+          onBlur={(e) => {
+            setIsFocused(false);
+            rest.onBlur?.(e);
+          }}
+          className={`
+            peer w-full ${iconPadding} py-3 border rounded-sm transition-all
+            border-neutV-900 text-neutV-700 placeholder-transparent bg-white/20     
+                 focus:outline-none focus:bg-limeV-50 focus:border-limeV-700
+            hover:bg-limeV-50 hover:border-limeV-900 disabled:bg-neutral-100 disabled:cursor-not-allowed disabled:border-0
+            ${error ? "bg-redV-50 border-redV-700 text-redV-700" : ""}
+            ${className}
+          `}
+          placeholder={rest.placeholder ?? " "}
+        />
+      </div>
+
+      {error && <p className="mt-1 ps-2 text-sm text-redV-700">{error}</p>}
     </div>
   );
-};
+});
 
+Input.displayName = "Input";
 export default Input;
