@@ -73,10 +73,16 @@ const config: Config = {
           "0%, 100%": { transform: "translateX(0)" },
           "50%": { transform: "translateX(-20px)" },
         },
+        "fade-scale": {
+          "0%": { opacity: "0", transform: "scale(0.7)" },
+          "50%": { opacity: "1", transform: "scale(1.05)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
       },
       animation: {
         "slide-right-left": "slide-right-left 4s ease-in-out infinite",
         "slide-left-right": "slide-left-right 4s ease-in-out infinite",
+        "fade-scale": "fade-scale 1.6s ease-out forwards",
       },
     },
   },
