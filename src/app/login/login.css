@@ -1,0 +1,13 @@
+.bg-light {
+  background-image: url("../../public/light_bg.png");
+}
+.bg-dark {
+  background-image: url("../../public/dark_bg.png");
+}
+
+.aawiz-title-light {
+  background-image: url("../../public/Aawiz_light.png");
+}
+.aawiz-title-dark {
+  background-image: url("../../public/Aawiz_dark.png");
+}
