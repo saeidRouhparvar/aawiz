@@ -2,32 +2,31 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import BackgroundAnimation from "./pages/BackgroundAnimation";
 
 const Splash = () => {
   const router = useRouter();
   const [showSplash, setShowSplash] = useState(true);
 
- useEffect(() => {
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowSplash(false);
+      router.push("/login");
+    }, 2500);
 
-
-  const timeout = setTimeout(() => {
-    setShowSplash(false);
-    router.push("/login");
-  }, 3000);
-
-  return () => {
-    clearTimeout(timeout);
-  };
-}, [router]);
-
+    return () => clearTimeout(timeout);
+  }, [router]);
 
   if (!showSplash) return null;
 
   return (
-    <div className="flex items-center justify-center h-screen ">
-      <h1 className="text-6xl font-bold text-cyanV-600 dark:text-cyanV-400">
-       Aawiz
+    <div className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-neutV-50 dark:bg-neutV-900">
+      <BackgroundAnimation />
+
+      <h1 className="text-8xl font-extrabold text-limeV-700 animate-fade-scale">
+        Aawiz
       </h1>
+
     </div>
   );
 };
