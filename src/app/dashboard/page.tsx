@@ -4,7 +4,6 @@ import HeadcountChart from '@/components/charts/HeadcountChart';
 import TenureChart from '@/components/charts/TenureChart';
 import TurnoverRateChart from '@/components/charts/TurnoverRateChart';
 import UserCard from '@/components/pages/user-cart';
-import { ToggleButton } from '@/components/ui/ToggleButton';
 import { useGetUsers } from '@/services/useGetWorker';
 import React from 'react';
 import { UserType } from '../utils/types';
@@ -15,10 +14,6 @@ const Dashboard = () => {
 
     return (
         <div className={`min-h-screen p-8 transition-colors duration-300 bg-neutV-50`}>
-            <div className="flex justify-between">
-                <div className=""></div>
-            <ToggleButton />
-            </div>
 
             <h1 className='text-3xl font-bold mb-8 text-limeV-700'>
                 HR Analytics Overview
