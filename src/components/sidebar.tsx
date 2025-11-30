@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { Icon } from './icons/icon';
+import Link from 'next/link';
 
-export default function Sidebar() {
+const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleSidebar = () => setIsExpanded(!isExpanded);
@@ -38,9 +39,9 @@ export default function Sidebar() {
         {/* Menu Items */}
         <nav className="flex-1 mt-4">
           {menuItems.map((item) => (
-            <a
+            <Link
               key={item.name}
-              href="#"
+              href="/dashboard"
               className="
         group flex items-center px-4 py-3 rounded-xl 
         text-neutV-300 hover:bg-neutV-800 
@@ -59,7 +60,7 @@ export default function Sidebar() {
               >
                 {item.name}
               </span>
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -67,3 +68,4 @@ export default function Sidebar() {
     </div>
   );
 }
+export default Sidebar
