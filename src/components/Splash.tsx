@@ -2,8 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import BackgroundAnimation from "./pages/BackgroundAnimation";
+import dynamic from "next/dynamic";
 
+const BackgroundAnimation = dynamic(() => import("./pages/BackgroundAnimation"), {
+  ssr: false,
+});
 const Splash = () => {
   const router = useRouter();
   const [showSplash, setShowSplash] = useState(true);
@@ -20,7 +23,8 @@ const Splash = () => {
   if (!showSplash) return null;
 
   return (
-    <div className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-neutV-50 dark:bg-neutV-900">
+    <div className="relative w-full h-screen flex items-center justify-center overflow-hidden 
+    bg-neutV-50">
       <BackgroundAnimation />
 
       <h1 className="text-8xl font-extrabold text-limeV-700 animate-fade-scale">
