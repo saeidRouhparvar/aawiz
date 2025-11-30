@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 import TopBar from "@/components/TopBar";
 import MobileMenu from "@/components/pages/MobileMenu";
 
-export default function ClientLayout({ children }: { children: ReactNode }) {
+const ClientLayout = ({ children }: { children: ReactNode }) => {
     const [queryClient] = useState(() => new QueryClient());
     const pathname = usePathname();
 
@@ -29,8 +29,9 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
                 )}
 
                 <div className="w-full flex flex-col">
-
-                    <TopBar menuClick={() => setMenuOpen(true)} />
+                    {!hideSidebar &&
+                        <TopBar menuClick={() => setMenuOpen(true)} />
+                    }
 
                     <QueryClientProvider client={queryClient}>
                         {children}
@@ -48,3 +49,5 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
         </ThemeProvider>
     );
 }
+
+export default ClientLayout
