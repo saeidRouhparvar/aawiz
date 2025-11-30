@@ -38,11 +38,10 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         transition={{ type: "tween", duration: 0.25 }}
         className="fixed left-0 top-0 w-[230px] h-full bg-limeV-100 shadow-xl z-50 p-6"
       >
-        <h2 className="text-2xl font-bold mb-6">Menu</h2>
+        <h2 className="text-2xl font-bold mb-6 text-limeV-900">Menu</h2>
 
-        <nav className="flex flex-col gap-4 text-lg">
+        <nav className="flex flex-col gap-4 text-lg text-limeV-950">
           <Link className="hover:text-limeV-600" href="/dashboard">Dashboard</Link>
-          <Link className="hover:text-limeV-600" href="/profile">profile</Link>
         </nav>
       </motion.div>
     </>
