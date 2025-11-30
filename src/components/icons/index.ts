@@ -1,4 +1,5 @@
 import { Arrow } from "./icons-components/arrow";
+import { Burger } from "./icons-components/burger";
 import { Dashboard } from "./icons-components/dashboard";
 import { Earth } from "./icons-components/earth";
 import { Moon } from "./icons-components/moon";
@@ -14,6 +15,7 @@ const icons = {
   password: Password,
   dashboard: Dashboard,
   arrow: Arrow,
+  burger: Burger,
 };
 
 export default icons;
