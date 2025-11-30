@@ -17,16 +17,19 @@ const BackgroundAnimation = ({ theme }: BackgroundAnimationProps) => {
                 alt="aawiz"
                 src={imgSrc}
                 className="w-[60%] h-auto self-start animate-slide-right-left"
+                priority
             />
             <Image
                 alt="aawiz"
                 src={imgSrc}
                 className="w-[60%] h-auto self-end animate-slide-left-right"
+                priority
             />
             <Image
                 alt="aawiz"
                 src={imgSrc}
                 className="w-[60%] h-auto self-start animate-slide-right-left"
+                priority
             />
         </div>
     );
