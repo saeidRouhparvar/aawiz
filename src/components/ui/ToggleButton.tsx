@@ -54,7 +54,6 @@ export const ToggleButton = () => {
           "
           animate={{
             x: isDark ? slideDistance : 0,
-            backgroundColor: isDark ? "var(--Teal_300)" : "var(--Teal_400)",
           }}
           transition={{
             type: "spring",
