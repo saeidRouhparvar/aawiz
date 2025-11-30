@@ -6,32 +6,45 @@ import Sidebar from "@/components/sidebar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode, useState } from "react";
 import { usePathname } from "next/navigation";
+import TopBar from "@/components/TopBar";
+import MobileMenu from "@/components/pages/MobileMenu";
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
     const [queryClient] = useState(() => new QueryClient());
     const pathname = usePathname();
 
-    const noSidebarRoutes = ["/", "/login", "/register"];
+    const [menuOpen, setMenuOpen] = useState(false);
 
+    const noSidebarRoutes = ["/", "/login", "/register"];
     const hideSidebar = noSidebarRoutes.includes(pathname);
 
     return (
-        <div className="flex">
-            {!hideSidebar && (
-                <div>
-                    <Sidebar />
-                </div>
-            )}
+        <ThemeProvider>
+            <div className="flex">
 
-            <div className="w-full">
-                <ThemeProvider>
+                {!hideSidebar && (
+                    <div className="hidden lg:block">
+                        <Sidebar />
+                    </div>
+                )}
+
+                <div className="w-full flex flex-col">
+
+                    <TopBar menuClick={() => setMenuOpen(true)} />
+
                     <QueryClientProvider client={queryClient}>
                         {children}
                     </QueryClientProvider>
 
                     <Toaster position="top-center" />
-                </ThemeProvider>
+                </div>
+
+                <MobileMenu
+                    isOpen={menuOpen}
+                    onClose={() => setMenuOpen(false)}
+                />
+
             </div>
-        </div>
+        </ThemeProvider>
     );
 }
