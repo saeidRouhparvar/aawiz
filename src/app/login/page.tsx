@@ -46,7 +46,7 @@ const Login = () => {
             const storedData = localStorage.getItem('register')
 
             if (!storedData) {
-                alert("No registration found. Please register first.")
+                toast.error("No registration found. Please register first.")
                 return
             }
 
@@ -61,7 +61,7 @@ const Login = () => {
 
         } catch (error) {
             console.error("Error during login:", error)
-            alert("An error occurred during login.")
+            toast.error("An error occurred during login.")
         }
     }
 
