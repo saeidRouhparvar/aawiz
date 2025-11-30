@@ -65,7 +65,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
             className={`absolute top-1/2 -translate-y-1/2 text-neutV-700 ${iconPosition === "left" ? "left-3" : "right-3"}`}
             aria-hidden
           >
-            <Icon name={icon} className="text-limeV-700"/>
+            <Icon name={icon} className="text-limeV-700" />
           </span>
         )}
 
@@ -82,6 +82,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
             setIsFocused(false);
             rest.onBlur?.(e);
           }}
+          onAnimationStart={(e) => {
+            if (e.animationName === "onAutoFillStart") {
+              setIsFocused(true);
+            }
+          }}
+
           className={`
             peer w-full ${iconPadding} py-3 border rounded-sm transition-all
             border-neutV-900 text-neutV-700 placeholder-transparent bg-white/20     
